@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car Rental Confirmed - Aerona</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      padding: 40px 20px;
+      margin: 0;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    .container {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      position: relative;
+    }
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #f39c12, #e67e22, #d35400);
+    }
+    .header {
+      background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+      padding: 40px 30px;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .car-icon {
+      font-size: 60px;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .confirmation-banner {
+      background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .body {
+      padding: 40px;
+      background-color: #f8f9fa;
+    }
+    .rental-details {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    .car-header {
+      background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+    .car-name {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+    }
+    .car-category {
+      font-size: 16px;
+      opacity: 0.9;
+      margin: 0;
+    }
+    .details-grid {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .detail-item {
+      padding: 15px;
+      border-left: 4px solid #f39c12;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    .detail-label {
+      font-size: 12px;
+      color: #7f8c8d;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .detail-value {
+      font-size: 16px;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+    .pickup-dropoff {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .location-card {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-left: 4px solid #3498db;
+    }
+    .location-type {
+      font-size: 14px;
+      color: #3498db;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .location-details {
+      color: #2c3e50;
+    }
+    .price-summary {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #ecf0f1;
+    }
+    .price-row:last-child {
+      border-bottom: 2px solid #f39c12;
+      font-weight: 700;
+      font-size: 18px;
+      color: #2c3e50;
+    }
+    .important-info {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    .important-info h3 {
+      color: #856404;
+      margin: 0 0 15px 0;
+    }
+    .driver-info {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .driver-card {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 15px;
+      border-left: 4px solid #e74c3c;
+    }
+    .cta-section {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      margin: 0 10px 10px 0;
+    }
+    .footer {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      padding: 25px;
+      text-align: center;
+      font-size: 14px;
+      color: #bdc3c7;
+    }
+    @media (max-width: 600px) {
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+      .cta-button {
+        display: block;
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <span class="car-icon">🚗</span>
+      <h1>Aerona Travel</h1>
+    </div>
+    
+    <div class="confirmation-banner">
+      Car Rental Confirmed! Booking #<%= bookingId %>
+    </div>
+    
+    <div class="body">
+      <!-- Car Details -->
+      <div class="rental-details">
+        <div class="car-header">
+          <h2 class="car-name"><%= carModel %></h2>
+          <p class="car-category"><%= carCategory %> | <%= transmission %> | <%= fuelType %></p>
+        </div>
+        
+        <div class="details-grid">
+          <div class="detail-item">
+            <div class="detail-label">Rental Period</div>
+            <div class="detail-value"><%= rentalDays %> Days</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Mileage</div>
+            <div class="detail-value"><%= mileageLimit %></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Seats</div>
+            <div class="detail-value"><%= seatingCapacity %> Passengers</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Features</div>
+            <div class="detail-value"><%= carFeatures %></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pickup & Drop-off -->
+      <div class="pickup-dropoff">
+        <h3 style="margin: 0 0 20px 0; color: #2c3e50;">Pickup & Drop-off Details</h3>
+        
+        <div class="location-card">
+          <div class="location-type">📍 Pickup Location</div>
+          <div class="location-details">
+            <strong><%= pickupLocation %></strong><br>
+            <%= pickupAddress %><br>
+            <strong>Date & Time:</strong> <%= pickupDateTime %><br>
+            <strong>Contact:</strong> <%= pickupPhone %>
+          </div>
+        </div>
+
+        <div class="location-card">
+          <div class="location-type">📍 Drop-off Location</div>
+          <div class="location-details">
+            <strong><%= dropoffLocation %></strong><br>
+            <%= dropoffAddress %><br>
+            <strong>Date & Time:</strong> <%= dropoffDateTime %><br>
+            <strong>Contact:</strong> <%= dropoffPhone %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Driver Information -->
+      <div class="driver-info">
+        <h3 style="margin: 0 0 20px 0; color: #2c3e50;">Primary Driver Information</h3>
+        <div class="driver-card">
+          <strong>Driver:</strong> <%= driverName %><br>
+          <strong>License Number:</strong> <%= licenseNumber %><br>
+          <strong>Phone:</strong> <%= driverPhone %><br>
+          <strong>Email:</strong> <%= driverEmail %>
+        </div>
+      </div>
+
+      <!-- Price Summary -->
+      <div class="price-summary">
+        <h3 style="margin: 0 0 20px 0; color: #2c3e50;">Rental Cost Breakdown</h3>
+        <div class="price-row">
+          <span>Base Rental (<%= rentalDays %> days)</span>
+          <span>$<%= baseRentalCost %></span>
+        </div>
+        <div class="price-row">
+          <span>Insurance</span>
+          <span>$<%= insuranceCost %></span>
+        </div>
+        <div class="price-row">
+          <span>Additional Services</span>
+          <span>$<%= additionalServices %></span>
+        </div>
+        <div class="price-row">
+          <span>Taxes & Fees</span>
+          <span>$<%= taxesAndFees %></span>
+        </div>
+        <div class="price-row">
+          <span>Total Amount</span>
+          <span>$<%= totalAmount %></span>
+        </div>
+      </div>
+
+      <div class="important-info">
+        <h3>🚗 Important Rental Information</h3>
+        <ul style="margin: 0; padding-left: 20px;">
+          <li>Bring a valid driver's license and credit card for pickup</li>
+          <li>Minimum age requirement: <%= minimumAge %> years</li>
+          <li>Fuel Policy: <%= fuelPolicy %></li>
+          <li>Cancellation Policy: <%= cancellationPolicy %></li>
+          <li>Late return charges may apply after <%= gracePeriod %></li>
+        </ul>
+      </div>
+
+      <div class="cta-section">
+        <a href="<%= viewBookingUrl %>" class="cta-button">View Booking</a>
+        <a href="<%= modifyBookingUrl %>" class="cta-button">Modify Booking</a>
+        <a href="<%= addExtrasUrl %>" class="cta-button">Add Extras</a>
+      </div>
+    </div>
+    
+    <div class="footer">
+      &copy; <%= year %> Aerona Travel. All rights reserved.<br>
+      Need help? Contact us at support@aerona.com or call +1-800-AERONA
+    </div>
+  </div>
+</body>
+</html>

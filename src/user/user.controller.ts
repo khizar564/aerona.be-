@@ -35,15 +35,15 @@ export class UserController {
     else {
 
      const newUser=await this.userService.create({ ...createUserDto, isEmailVerified: false, verificationCode });
-      await this.emailService.sendMail(
-        {
-          ...emailDto,
-          to: createUserDto.email,
-          subject:'email Verification',
-          text:'your verification code'
-        },
-        verificationCode
-      )
+      // await this.emailService.sendMail(
+      //   {
+      //     ...emailDto,
+      //     to: createUserDto.email,
+      //     subject:'email Verification',
+      //     text:'your verification code'
+      //   },
+      //   verificationCode
+      // )
     return newUser
     // await this.emailService.sendSms(
     //   createUserDto.phone,

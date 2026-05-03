@@ -34,7 +34,6 @@ let UserController = class UserController {
             throw new common_1.HttpException('User already exists', 400);
         else {
             const newUser = await this.userService.create(Object.assign(Object.assign({}, createUserDto), { isEmailVerified: false, verificationCode }));
-            await this.emailService.sendMail(Object.assign(Object.assign({}, emailDto), { to: createUserDto.email, subject: 'email Verification', text: 'your verification code' }), verificationCode);
             return newUser;
         }
     }
