@@ -25,7 +25,7 @@ let StripeService = class StripeService {
                 throw new Error('STRIPE_SECRET_KEY is missing');
             }
             this.stripe = new stripe_1.default(secret, {
-                apiVersion: "2025-05-28.basil",
+                apiVersion: "2025-08-27.basil",
             });
         }
         return this.stripe;

@@ -27,21 +27,35 @@ const invoices_module_1 = require("./invoices/invoices.module");
 const invoice_module_1 = require("./invoice/invoice.module");
 const hotel_invoice_module_1 = require("./hotel-invoice/hotel-invoice.module");
 const notifications_module_1 = require("./notifications/notifications.module");
+console.log('=== APP MODULE LOAD ===');
+console.log('DATABASE_URL at module load:', process.env.DATABASE_URL);
+console.log('=======================');
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [user_module_1.UserModule,
-            config_1.ConfigModule.forRoot(),
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'postgres',
-                url: process.env.database_url,
-                entities: [__dirname + '/**/*.entity{.ts,.js}'],
-                synchronize: false,
-                ssl: {
-                    rejectUnauthorized: true,
+        imports: [
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+                envFilePath: '.env',
+            }),
+            typeorm_1.TypeOrmModule.forRootAsync({
+                useFactory: () => {
+                    console.log('=== TYPEORM CONFIG ===');
+                    console.log('DATABASE_URL received:', process.env.DATABASE_URL);
+                    console.log('=====================');
+                    return {
+                        type: 'postgres',
+                        url: process.env.DATABASE_URL,
+                        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+                        synchronize: false,
+                        ssl: {
+                            rejectUnauthorized: true,
+                        },
+                    };
                 },
             }),
+            user_module_1.UserModule,
             auth_module_1.AuthModule,
             hotels_module_1.HotelsModule,
             rooms_module_1.RoomsModule,
